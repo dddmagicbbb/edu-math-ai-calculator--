@@ -62,7 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({ error: '알 수 없는 서버 오류' }));
                 console.error('Server Error Response:', errorData);
-                alert(`에러가 발생했습니다: ${errorData.error}`);
+                let msg = `에러가 발생했습니다: ${errorData.error}`;
+                if (errorData.hint) msg += `\n\n💡 힌트: ${errorData.hint}`;
+                alert(msg);
                 return;
             }
 
