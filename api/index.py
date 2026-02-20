@@ -94,8 +94,13 @@ def calculate():
             return jsonify({"error": "AI가 올바른 형식의 데이터를 생성하지 못했습니다."}), 500
 
     except Exception as e:
-        print(f"Error during calculation: {str(e)}") # 디버깅용 로그
-        return jsonify({"error": str(e)}), 500
+        error_type = type(e).__name__
+        error_msg = str(e)
+        print(f"[{error_type}] Error during calculation: {error_msg}") # Vercel 로그용
+        return jsonify({
+            "error": f"AI 서비스 연결 오류 ({error_type}): {error_msg}",
+            "hint": "Vercel의 Environment Variables에 GROQ_API_KEY가 정확히 입력되었는지 확인해 주세요."
+        }), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
