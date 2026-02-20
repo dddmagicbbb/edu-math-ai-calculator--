@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-Math AI Calculator</title>
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <!-- Custom CSS (to be created in Sprint 2) -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Edu-Math AI</h1>
+            <p class="subtitle">계산을 넘어 원리까지, 당신을 위한 AI 수학 선생님</p>
+        </header>
+
+        <main>
+            <!-- Input Card -->
+            <section class="card input-section">
+                <div class="input-group">
+                    <label>학습 수준 선택</label>
+                    <div class="level-selector" id="level-selector">
+                        <button class="level-chip" data-level="초등">초등</button>
+                        <button class="level-chip active" data-level="중등">중등</button>
+                        <button class="level-chip" data-level="고등">고등</button>
+                        <button class="level-chip" data-level="대학생">대학생</button>
+                    </div>
+
+                    <label for="formula-input">수식 입력 (LaTeX 또는 일반 텍스트)</label>
+                    <textarea id="formula-input"
+                        placeholder="예: x^2 + 2x + 1 = 0 또는 \frac{1}{2} + \frac{1}{3}"></textarea>
+
+                    <div class="preview-label">실시간 미리보기</div>
+                    <div id="math-preview" class="preview-box">수식을 입력하면 여기에 표시됩니다.</div>
+
+                    <button id="calc-btn">계산 및 학습 시작</button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div id="loader" class="loader">
+                <div class="spinner"></div>
+                <p id="loading-msg">AI 교정 선생님이 수식을 분석하고 있습니다...</p>
+            </div>
+
+            <!-- Result Section -->
+            <section id="result-area" class="result-section">
+                <!-- Final Result Card -->
+                <div class="card result-card">
+                    <h3><span class="icon">✨</span>최종 결과</h3>
+                    <div id="final-result" class="math-display"></div>
+                </div>
+
+                <!-- Explanation Card -->
+                <div class="card result-card">
+                    <h3><span class="icon">📖</span>단계별 풀이 및 원리</h3>
+                    <div id="explanation-text" class="explanation-content"></div>
+                </div>
+
+                <!-- Similar Problem Card -->
+                <div class="card similar-box">
+                    <h3><span class="icon">🎯</span>교과 연계 유사 문제</h3>
+                    <div id="similar-problem" class="math-display"></div>
+                    <hr style="margin: 1.5rem 0; opacity: 0.1;">
+                    <div id="similar-answer" class="explanation-content"
+                        style="font-style: italic; color: var(--text-muted);"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p style="text-align: center; margin-top: 3rem; color: var(--text-muted); font-size: 0.8rem;">
+                © 2026 Edu-Math AI Calculator. All rights reserved.
+            </p>
+        </footer>
+    </div>
+
+    <!-- KaTeX Auto-render Extension -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
