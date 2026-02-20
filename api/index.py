@@ -10,9 +10,12 @@ load_dotenv()
 app = Flask(__name__, static_folder='../static', template_folder='../templates')
 CORS(app)
 
-# Groq 클라이언트 초기화 (API 키가 있을 경우에만)
-api_key = os.environ.get("GROQ_API_KEY")
-client = Groq(api_key=api_key) if api_key else None
+# Groq 클라이언트 초기화 함수 (Vercel 서버리스 최적화)
+def get_groq_client():
+    api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        return None
+    return Groq(api_key=api_key)
 
 @app.route('/')
 def index():
@@ -20,8 +23,12 @@ def index():
 
 @app.route('/api/calculate', methods=['POST'])
 def calculate():
+    client = get_groq_client()
     if not client:
-        return jsonify({"error": "GROQ_API_KEY가 설정되지 않았습니다. .env 파일을 확인해주세요."}), 500
+        return jsonify({
+            "error": "GROQ_API_KEY가 설정되지 않았습니다.",
+            "hint": "Vercel Project Settings > Environment Variables에 키를 등록했는지 확인해 주세요."
+        }), 500
         
     data = request.json
     formula = data.get('formula')
