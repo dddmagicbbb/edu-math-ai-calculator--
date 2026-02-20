@@ -1,4 +1,7 @@
-# Edu-Math AI Calculator (학습 밀착형 AI 공학계산기)
+# 🎓 Edu-Math AI Calculator
+
+> **수학 개념을 수준별로 깊이 있게, AI가 풀고 설명하는 맞춤형 계산기**  
+> **[LIVE 서비스 바로가기](https://edu-math-ai-calculator-시작.vercel.app)** (Vercel 배포 완료)
 
 > **계산을 넘어 원리까지, 당신을 위한 AI 수학 선생님**
 
